@@ -12,6 +12,10 @@
         <maven.compiler.source>22</maven.compiler.source>
         <maven.compiler.target>22</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <sonar.projectKey>yassineboughroudi</sonar.projectKey>
+        <sonar.organization>Yassine Boughroudi</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.login>${env.SONAR_TOKEN}</sonar.login> <!-- This will use the token stored in GitHub Secrets -->
     </properties>
     <dependencies>
         <!-- Spring Boot Starter Web -->
