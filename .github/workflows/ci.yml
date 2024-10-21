@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: CI/CD Pipeline
 
 on:
   push:
@@ -47,13 +47,13 @@ jobs:
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/conference-citation-tool:${{ github.sha }}
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/conference-citation-tool:latest
 
-      - name: Set up Cloud SDK
+      - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
         with:
-          version: 'latest'
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          export_default_credentials: true
+          service_account_key: ${{ secrets.GCP_SA_KEY }}  # Service account key from GitHub Secrets
+          project_id: ${{ secrets.GCP_PROJECT_ID }}       # Your Google Cloud project ID
+          export_default_credentials: true               # Exports the credentials for use in subsequent steps
+
 
       - name: Authenticate to GKE
         run: |
