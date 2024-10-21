@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: conference-citation-tool-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: conference-citation-tool
+  template:
+    metadata:
+      labels:
+        app: conference-citation-tool
+    spec:
+      containers:
+        - name: conference-citation-tool
+          image: boughroudi/conference-citation-tool:1.0.0
+          ports:
+            - containerPort: 8080
