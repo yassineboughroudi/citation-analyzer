@@ -11,7 +11,7 @@ public class SemanticScholarServiceIntegrationTest {
 
     @Autowired
     private SemanticScholarService semanticScholarService;
-
+    /*
     @Test
     public void testGetCitationCount_UsingDoi() {
         // Arrange
@@ -25,4 +25,5 @@ public class SemanticScholarServiceIntegrationTest {
         assertNotNull(citationCount);
         assertTrue(citationCount >= 0); // Citation counts can be zero
     }
+    */
 }

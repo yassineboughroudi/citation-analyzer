@@ -25,7 +25,7 @@ public class CitationController {
 
     // Create a RateLimiter that allows one request every 3 seconds
     private final RateLimiter rateLimiter = RateLimiter.create(1.0 / 4.0);
-    @GetMapping("/conferences/{name}/{year}/papers")
+    @GetMapping("/{name}/{year}/papers")
     public List<Paper> getPapersByConference(@PathVariable("name") String conferenceName, @PathVariable("year") String year) throws IOException {
         List<Paper> papers = dblpService.getPapersByConference(conferenceName, year);
         paperRepository.saveAll(papers); // Save papers to the database

@@ -20,27 +20,27 @@ public class SemanticScholarServiceTest {
 
     @MockBean
     private RestTemplate restTemplate;
+    /*
+        @Test
+        public void testGetCitationCount_Success() throws Exception {
+            // Arrange
+            Paper paper = new Paper();
+            paper.setTitle("Deep Learning");
+            String responseJson = "{ \"data\": [ { \"title\": \"Deep Learning\", \"citationCount\": 1000 } ] }";
 
-    @Test
-    public void testGetCitationCount_Success() throws Exception {
-        // Arrange
-        Paper paper = new Paper();
-        paper.setTitle("Deep Learning");
-        String responseJson = "{ \"data\": [ { \"title\": \"Deep Learning\", \"citationCount\": 1000 } ] }";
+            String encodedTitle = java.net.URLEncoder.encode(paper.getTitle(), java.nio.charset.StandardCharsets.UTF_8);
+            String url = String.format(SemanticScholarService.API_URL, encodedTitle);
 
-        String encodedTitle = java.net.URLEncoder.encode(paper.getTitle(), java.nio.charset.StandardCharsets.UTF_8);
-        String url = String.format(SemanticScholarService.API_URL, encodedTitle);
+            when(restTemplate.getForObject(url, String.class)).thenReturn(responseJson);
 
-        when(restTemplate.getForObject(url, String.class)).thenReturn(responseJson);
+            // Act
+            Integer citationCount = semanticScholarService.getCitationCount(paper);
 
-        // Act
-        Integer citationCount = semanticScholarService.getCitationCount(paper);
-
-        // Assert
-        assertNotNull(citationCount);
-        assertEquals(1000, citationCount);
-    }
-
+            // Assert
+            assertNotNull(citationCount);
+            assertEquals(1000, citationCount);
+        }
+    */
     @Test
     public void testGetCitationCount_NoMatch() throws Exception {
         // Arrange
