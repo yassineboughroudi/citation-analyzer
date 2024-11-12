@@ -2,6 +2,7 @@ package org.unisannio.model;
 
 import jakarta.persistence.*;
 
+
 @Entity
 @Table(name = "papers")
 public class Paper {
@@ -9,11 +10,12 @@ public class Paper {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String doi;
     private String title;
     private String authors;
     private String url;
     private String dblpUrl;
+    private Integer citationCount;
 
     // Getters and Setters
 
@@ -25,6 +27,14 @@ public class Paper {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDoi() {
+        return doi;
+    }
+
+    public void setDoi(String doi) {
+        this.doi = doi;
     }
 
     public String getTitle() {
@@ -57,5 +67,12 @@ public class Paper {
 
     public void setDblpUrl(String dblpUrl) {
         this.dblpUrl = dblpUrl;
+    }
+    public Integer getCitationCount() {
+        return citationCount;
+    }
+
+    public void setCitationCount(Integer citationCount) {
+        this.citationCount = citationCount;
     }
 }

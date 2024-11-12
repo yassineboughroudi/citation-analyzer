@@ -2,7 +2,6 @@ package org.unisannio.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.unisannio.model.Paper;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -49,7 +48,10 @@ public class DblpService {
                         String urlLink = info.path("ee").asText("");
                         String dblpUrl = info.path("url").asText("");
 
-// Authors extraction
+                        // **Extract DOI from the 'ee' field**
+                        String doi = extractDoiFromEe(urlLink);
+
+                        // **Authors extraction**
                         JsonNode authorsNode = info.path("authors").path("author");
                         List<String> authorsList = new ArrayList<>();
 
@@ -58,7 +60,7 @@ public class DblpService {
                             authorsList.add("Unknown");
                         } else if (authorsNode.isArray()) {
                             for (JsonNode authorNode : authorsNode) {
-                                String authorName = authorNode.path("text").asText("").trim();  // Extract the 'text' field
+                                String authorName = authorNode.path("text").asText("").trim();
                                 if (!authorName.isEmpty()) {
                                     authorsList.add(authorName);
                                 }
@@ -77,15 +79,15 @@ public class DblpService {
                             authorsList.add("Unknown");
                         }
 
-// Create a Paper object
+                        // **Create a Paper object**
                         Paper paper = new Paper();
                         paper.setTitle(title);
                         paper.setAuthors(String.join(", ", authorsList));
                         paper.setUrl(urlLink);
                         paper.setDblpUrl(dblpUrl);
+                        paper.setDoi(doi);  // **Set the DOI**
 
                         papers.add(paper);
-
                     }
                 }
             }
@@ -94,4 +96,24 @@ public class DblpService {
         return papers;
     }
 
+    // **Method to extract DOI from the 'ee' field**
+    private String extractDoiFromEe(String ee) {
+        if (ee == null || ee.isEmpty()) {
+            return null;
+        }
+
+        // The 'ee' field may contain multiple URLs separated by commas
+        String[] urls = ee.split(",");
+
+        for (String url : urls) {
+            url = url.trim();
+            if (url.contains("doi.org/")) {
+                int index = url.indexOf("doi.org/");
+                String doi = url.substring(index + 8);
+                return doi;
+            }
+        }
+
+        return null;  // DOI not found
+    }
 }
